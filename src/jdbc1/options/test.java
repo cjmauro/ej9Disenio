@@ -24,7 +24,7 @@ public class test {
 	        System.out.println("\n"); 
 
 	        System.out.println("Resultados de query7 - Estudiantes de 'alimentos' en Buenos Aires:");
-	        query7 consulta7 = new query7();
+	        query7 consulta7 = new query7("alimentos", "Buenos Aires");
 	        List<Object[]> resultados7 = consulta7.buscarEstudiantes(em);
 	        for (Object[] fila : resultados7) {
 	            for (Object valor : fila) {
