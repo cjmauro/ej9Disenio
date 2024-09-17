@@ -22,7 +22,6 @@ public class SelectSimple implements Select{
 	}
 	
 	
-
 	public String getTabla() {
 		return tabla;
 	}
@@ -69,7 +68,7 @@ public class SelectSimple implements Select{
         // HQL para obtener el nombre del estudiante, apellido, nombre de la carrera, antig�edad y si es graduado
         String hql = "SELECT * " +
                      "FROM " + tabla +
-                      "WHERE" + filtro.applyFiltro() +
+                     "WHERE " + filtro.applyFiltro() +
                       criterio.applyOrdernamiento();
         Query query = em.createQuery(hql);
         List<Object[]> resultList = query.getResultList();

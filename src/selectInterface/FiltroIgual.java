@@ -27,6 +27,6 @@ public class FiltroIgual implements FiltroBase{
 	public String applyFiltro() {
 		return  columna + " = " + valor;
 	}
-	
+
 
 }

@@ -42,15 +42,9 @@ public class SelectCompuesto implements Select{
 		return filtro;
 	}
 
-
-
-
 	public void setFiltro(FiltroBase filtro) {
 		this.filtro = filtro;
 	}
-
-
-
 
 	public CriterioOrd getCriterio() {
 		return criterio;
@@ -62,10 +56,7 @@ public class SelectCompuesto implements Select{
 	public void setCriterio(CriterioOrd criterio) {
 		this.criterio = criterio;
 	}
-
-
-
-
+	
 	@Override
 	public void execute() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Example");
@@ -94,6 +85,9 @@ public class SelectCompuesto implements Select{
         em.close();
         emf.close();
 	}
+
+
+
 	
 
 }
