@@ -9,12 +9,12 @@ import javax.persistence.Query;
 
 public class SelectSimple implements Select{
 	
-	private Tabla tabla;
+	private String tabla;
 	private FiltroBase filtro;
 	private CriterioOrd criterio;
 	
 	
-	public SelectSimple(Tabla tabla, FiltroBase filtro, CriterioOrd criterio) {
+	public SelectSimple(String tabla, FiltroBase filtro, CriterioOrd criterio) {
 		this.tabla = tabla;
 		this.filtro = filtro;
 		this.criterio = criterio;
@@ -23,13 +23,13 @@ public class SelectSimple implements Select{
 	
 	
 
-	public Tabla getTabla() {
+	public String getTabla() {
 		return tabla;
 	}
 
 
 
-	public void setTabla(Tabla tabla) {
+	public void setTabla(String tabla) {
 		this.tabla = tabla;
 	}
 
@@ -69,7 +69,7 @@ public class SelectSimple implements Select{
         // HQL para obtener el nombre del estudiante, apellido, nombre de la carrera, antig�edad y si es graduado
         String hql = "SELECT * " +
                      "FROM " + tabla +
-                      filtro.applyFiltro() +
+                      "WHERE" + filtro.applyFiltro() +
                       criterio.applyOrdernamiento();
         Query query = em.createQuery(hql);
         List<Object[]> resultList = query.getResultList();

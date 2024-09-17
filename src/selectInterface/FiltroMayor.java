@@ -1,10 +1,10 @@
 package selectInterface;
 
-public class FiltroIgual implements FiltroBase{
+public class FiltroMayor implements FiltroBase{
 	private String columna;
 	private Object valor;
 	
-	public FiltroIgual(String columna, Object valor) {
+	public FiltroMayor(String columna, Object valor) {
 		super();
 		this.columna = columna;
 		this.valor = valor;
@@ -25,7 +25,7 @@ public class FiltroIgual implements FiltroBase{
 
 	@Override
 	public String applyFiltro() {
-		return  columna + " = " + valor;
+		return columna + " > " + valor;
 	}
 	
 
