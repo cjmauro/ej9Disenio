@@ -1,7 +1,9 @@
 package selectInterface;
 
+import java.util.List;
+
 public interface Select {
 	
-	public void execute();
+	public List<Object[]> execute();
 
 }

@@ -58,7 +58,7 @@ public class SelectCompuesto implements Select{
 	}
 	
 	@Override
-	public void execute() {
+	public List<Object[]> execute() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Example");
         EntityManager em = emf.createEntityManager();
         
@@ -84,6 +84,8 @@ public class SelectCompuesto implements Select{
         em.getTransaction().commit();
         em.close();
         emf.close();
+        
+        return resultList;
 	}
 
 

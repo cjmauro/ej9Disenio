@@ -12,13 +12,15 @@ public class SelectSimple implements Select{
 	private String tabla;
 	private FiltroBase filtro;
 	private CriterioOrd criterio;
+	private Agrupamiento a;
+	List<String> valores;
 	
-	
-	public SelectSimple(String tabla, FiltroBase filtro, CriterioOrd criterio) {
+	public SelectSimple(String tabla, FiltroBase filtro, List<String> valores) {
 		this.tabla = tabla;
 		this.filtro = filtro;
-		this.criterio = criterio;
-		
+		this.valores = valores;
+		this.setCriterio(null);
+		this.setAgrupamiento(null);
 	}
 	
 	
@@ -59,32 +61,72 @@ public class SelectSimple implements Select{
 
 
 	@Override
-	public void execute() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Example");
-        EntityManager em = emf.createEntityManager();
-        
-        em.getTransaction().begin();
-        
-        // HQL para obtener el nombre del estudiante, apellido, nombre de la carrera, antigï¿½edad y si es graduado
-        String hql = "SELECT * " +
-                     "FROM " + tabla +
-                     "WHERE " + filtro.applyFiltro() +
-                      criterio.applyOrdernamiento();
-        Query query = em.createQuery(hql);
-        List<Object[]> resultList = query.getResultList();
-        
-        // Mostrar los resultados
+	public List<Object[]> execute() {
+	    EntityManagerFactory emf = Persistence.createEntityManagerFactory("Example");
+	    EntityManager em = emf.createEntityManager();
+	    
+	    em.getTransaction().begin();
+	    
+	    String selects = String.join(", ", valores);
+	    
+	    // HQL para obtener el nombre del estudiante, apellido, nombre de la carrera, antigüedad y si es graduado
+	    String hql = "SELECT " + selects + " FROM " + tabla;
+	    
+	    if (filtro != null) {
+	        hql += " WHERE " + filtro.applyFiltro();
+	    }
+	    
+	    if (criterio != null) {
+	        hql += criterio.applyOrdernamiento();
+	    }
+	    
+	    if (a != null) {
+	        hql += a.applyCriterio();
+	    }
+	    
+	    Query query = em.createQuery(hql);
+	    List<Object[]> resultList = query.getResultList();
+	    
         for (Object[] result : resultList) {
-            System.out.println("Nombre: " + result[0] + 
-                               ", Apellido: " + result[1] + 
-                               ", Carrera: " + result[2] + 
-                               ", Antigï¿½edad: " + result[3] + 
-                               ", Graduado: " + result[4]);
+            for (int i = 0; i < result.length; i++) {
+            	
+            	System.out.print(result[i]+ " "); 
+            }
+            System.out.println();
         }
-
-        em.getTransaction().commit();
-        em.close();
-        emf.close();
+	    
+	    em.getTransaction().commit();
+	    em.close();
+	    emf.close();
+	    
+	    return resultList;
 	}
 
+
+	public Agrupamiento getAgrupamiento() {
+		return a;
+	}
+
+
+	public void setAgrupamiento(Agrupamiento criterio) {
+		this.a = criterio;
+	}
+
+	public String getSQL() {
+		String selects = String.join(", ", valores);
+		String hql = "SELECT " + selects + " FROM " + tabla;
+	    if (filtro != null) {
+	        hql += " WHERE " + filtro.applyFiltro();
+	    }
+	    
+	    if (criterio != null) {
+	        hql += criterio.applyOrdernamiento();
+	    }
+	    
+	    if (a != null) {
+	        hql += a.applyCriterio();
+	    }
+		return hql;
+	}
+	
 }
