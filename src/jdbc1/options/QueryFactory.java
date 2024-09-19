@@ -54,9 +54,22 @@ public class QueryFactory {
 */ 
     
     
+    public static query getQueryAllEstudiantes(String columnaOrden, boolean ascendente) {
+        FiltroBase filtroCombinado = null;
+
+        List<String> valores = Arrays.asList("e.LU", "e.DNI", "e.nombre", "e.apellido", "e.ciudadResidencia", "e.edad", "e.genero");
+
+        OrdenamientoColumna criterioOrden = new OrdenamientoColumna(columnaOrden, ascendente);
+        BaseQuery bq = new BaseQuery("Estudiante e", filtroCombinado, valores);
+        bq.setCriterioOrden(criterioOrden);
+        
+        return bq;
+    }
     
     
-    public static query getQueryAllEstudiantes(OrdenamientoColumna criterioOrden) {
+    
+    
+    public static query ejercicioC(OrdenamientoColumna criterioOrden) {
         FiltroBase filtro1 = new FiltroIgual("e2,antiguedad", "'e.antiguedad'") ;
         
         
