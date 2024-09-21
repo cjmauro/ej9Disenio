@@ -25,12 +25,12 @@ public class OrdenamientoColumna implements CriterioOrd{
 		this.ascendente = ascendente;
 	}
 	
-	public String applyCriterio() {
+	public String applyOrdernamiento() {
 		String operador = "DESC";
 		if (ascendente == true) {
 			operador = "ASC";
 		}
-		return columna + operador;
+		return columna + " " +  operador;
 	}
 
 }

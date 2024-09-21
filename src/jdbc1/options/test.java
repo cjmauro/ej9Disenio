@@ -1,5 +1,7 @@
 package jdbc1.options;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -9,17 +11,27 @@ public class test {
 	        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Example");
 	        EntityManager em = emf.createEntityManager();
 
-	        query queryLU = QueryFactory.getQueryByLU("3");
-	        queryLU.EjecutarQuery(em);
-
-	        query queryGenero = QueryFactory.getQueryByGenero("Masculino");
-	        queryGenero.EjecutarQuery(em);
-
-	        query queryCarreraCiudad = QueryFactory.getQueryByCarreraAndCiudad("alimentos", "Buenos Aires");
-	        queryCarreraCiudad.EjecutarQuery(em);
+	        QueryFactory a = new QueryFactory();
+	        a.getQueryByLU("3");
 	        
-            query query = QueryFactory.getQueryCountEstudiantesPorCarrera();
-            query.EjecutarQuery(em);
+	        System.out.println("///////////////////////////////////////////////////////////");
+	        a.getQueryByGenero("Masculino");
+	        System.out.println("///////////////////////////////////////////////////////////");
+
+	        a.getQueryByCarreraAndCiudad("Ingenieria de Sistemas", "Buenos Aires");
+	       
+	        System.out.println("///////////////////////////////////////////////////////////");
+
+	        a.getQueryCountEstudiantesPorCarrera();
+          	
+	        System.out.println("///////////////////////////////////////////////////////////");
+
+          
+	        a.getQueryAllEstudiantes("apellido", true);
+	        
+	        System.out.println("///////////////////////////////////////////////////////////");
+	        
+	        a.ejercicioC();
 	        
 	        em.close();
 	        emf.close();

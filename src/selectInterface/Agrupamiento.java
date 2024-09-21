@@ -8,7 +8,7 @@ public class Agrupamiento {
 	}
 
 	public String applyCriterio() {
-		return " GROUP BY " + columna;
+		return columna;
 	}
 
 }

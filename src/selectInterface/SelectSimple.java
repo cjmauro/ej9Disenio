@@ -19,7 +19,7 @@ public class SelectSimple implements Select{
 		this.tabla = tabla;
 		this.filtro = filtro;
 		this.valores = valores;
-		this.setCriterio(null);
+		this.criterio = null;
 		this.setAgrupamiento(null);
 	}
 	
@@ -73,17 +73,20 @@ public class SelectSimple implements Select{
 	    String hql = "SELECT " + selects + " FROM " + tabla;
 	    
 	    if (filtro != null) {
+	    	
 	        hql += " WHERE " + filtro.applyFiltro();
 	    }
 	    
-	    if (criterio != null) {
-	        hql += criterio.applyOrdernamiento();
-	    }
-	    
 	    if (a != null) {
-	        hql += a.applyCriterio();
+
+	        hql += " GROUP BY " + a.applyCriterio();
 	    }
 	    
+	    
+	    if (criterio != null) {
+	        hql += " ORDER BY " + criterio.applyOrdernamiento();
+	    }
+
 	    Query query = em.createQuery(hql);
 	    List<Object[]> resultList = query.getResultList();
 	    
@@ -108,24 +111,30 @@ public class SelectSimple implements Select{
 	}
 
 
-	public void setAgrupamiento(Agrupamiento criterio) {
-		this.a = criterio;
+	public void setAgrupamiento(Agrupamiento a) {
+		this.a = a;
 	}
 
 	public String getSQL() {
 		String selects = String.join(", ", valores);
 		String hql = "SELECT " + selects + " FROM " + tabla;
+		   
 	    if (filtro != null) {
+	    	
 	        hql += " WHERE " + filtro.applyFiltro();
 	    }
 	    
-	    if (criterio != null) {
-	        hql += criterio.applyOrdernamiento();
-	    }
-	    
 	    if (a != null) {
+
+
 	        hql += a.applyCriterio();
 	    }
+	    
+	    
+	    if (criterio != null) {
+	        hql += " ORDER BY " + criterio.applyOrdernamiento();
+	    }
+
 		return hql;
 	}
 	
