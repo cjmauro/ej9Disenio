@@ -5,7 +5,7 @@ import java.util.List;
 
 import selectInterface.*;
 
-public class QueryFactory {
+public class QueryFactory { //ESTO TIENE Q DESAPARECER
 
     public void getQueryByLU(String LU) {
         List<String> valores = Arrays.asList("e.LU", "e.DNI", "e.nombre", "e.apellido", "e.ciudadResidencia", "e.edad", "e.genero");
@@ -38,9 +38,7 @@ public class QueryFactory {
         select.execute();
     }
 
-    
-
-
+   
     public void getQueryCountEstudiantesPorCarrera() {
         FiltroBase filtroCombinado = null;
         List<String> valores = Arrays.asList("e.nombre", "COUNT(e) AS inscriptos");
