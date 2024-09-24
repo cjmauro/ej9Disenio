@@ -15,7 +15,7 @@ public class BaseJPARepository<Entity, ID extends Serializable> implements Custo
     public BaseJPARepository(Class<Entity> entityClass, Class<ID> idClass) {
         this.entityClass = entityClass;
         this.idClass = idClass;
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nombre_de_unidad_de_persistencia");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Example");
         this.entityManager = emf.createEntityManager();
     }
 

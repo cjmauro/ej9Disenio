@@ -5,8 +5,10 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import selectInterface.Agrupamiento;
 import selectInterface.FiltroBase;
 import selectInterface.FiltroIgual;
+import selectInterface.OrdenamientoColumna;
 import selectInterface.SelectSimple;
 
 public class EstudianteDao<Entity, ID extends Serializable> extends BaseJPARepository<Estudiante,Integer>{
@@ -30,5 +32,23 @@ public class EstudianteDao<Entity, ID extends Serializable> extends BaseJPARepos
         SelectSimple select = new SelectSimple("Estudiante e", filtroGenero, valores);
         select.execute();
     }
+    
+    public void findAllEstudiantes(String columnaOrden, boolean ascendente) {
+        FiltroBase filtroCombinado = null;
+
+        List<String> valores = Arrays.asList("e.LU", "e.DNI", "e.nombre", "e.apellido", "e.ciudadResidencia", "e.edad", "e.genero");
+
+        OrdenamientoColumna criterioOrden = new OrdenamientoColumna(columnaOrden, ascendente);
+        
+        SelectSimple select = new SelectSimple("Estudiante e", filtroCombinado, valores);
+        select.setCriterio(criterioOrden);
+        System.out.println(select.getSQL());
+
+  
+        select.execute();
+    }
+    
+    
+    
     
 }

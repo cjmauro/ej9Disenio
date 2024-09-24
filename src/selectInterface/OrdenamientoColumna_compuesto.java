@@ -1,6 +1,4 @@
-package jdbc1.options;
-
-import selectInterface.CriterioOrd;
+package selectInterface;
 
 public class OrdenamientoColumna_compuesto implements CriterioOrd{
 	private String columna1;
