@@ -26,7 +26,9 @@ public class BaseJPARepository<Entity, ID extends Serializable> implements Custo
 
     @Override 
     public Entity persist(Entity entity) {
-        entityManager.persist(entity);  
+    	entityManager.getTransaction().begin();
+    	entityManager.persist(entity);
+    	entityManager.getTransaction().commit(); 
         return entity;
     }
 

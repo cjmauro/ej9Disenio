@@ -69,7 +69,6 @@ public class SelectSimple implements Select{
 	    
 	    String selects = String.join(", ", valores);
 	    
-	    // HQL para obtener el nombre del estudiante, apellido, nombre de la carrera, antigüedad y si es graduado
 	    String hql = "SELECT " + selects + " FROM " + tabla;
 	    
 	    if (filtro != null) {

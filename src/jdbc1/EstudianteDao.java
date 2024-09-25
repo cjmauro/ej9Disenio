@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-import selectInterface.Agrupamiento;
 import selectInterface.FiltroBase;
 import selectInterface.FiltroIgual;
 import selectInterface.OrdenamientoColumna;
@@ -18,7 +17,7 @@ public class EstudianteDao<Entity, ID extends Serializable> extends BaseJPARepos
     	super(Estudiante.class , Integer.class);
     }
 	
-    void findByLU(String LU){
+    public void findByLU(String LU){
         List<String> valores = Arrays.asList("e.LU", "e.DNI", "e.nombre", "e.apellido", "e.ciudadResidencia", "e.edad", "e.genero");
         FiltroBase filtroLU = new FiltroIgual("e.LU", "'" + LU + "'");
         SelectSimple select = new SelectSimple("Estudiante e", filtroLU, valores);
@@ -26,7 +25,7 @@ public class EstudianteDao<Entity, ID extends Serializable> extends BaseJPARepos
     }
     
     
-    void findByGenero(String genero) {
+    public void findByGenero(String genero) {
         List<String> valores = Arrays.asList("e.LU", "e.DNI", "e.nombre", "e.apellido", "e.ciudadResidencia", "e.edad", "e.genero");
         FiltroBase filtroGenero = new FiltroIgual("e.genero", "'" + genero + "'");
         SelectSimple select = new SelectSimple("Estudiante e", filtroGenero, valores);

@@ -18,5 +18,6 @@ public abstract class DAOFactory {
 		}
 	}
 }
-
+//los case comentados estan a modo de muestra para explicar la posibilidad del patron dao de extender la funcionalidad
+//a otros posibles mecanismos como pueden ser derby o mysql, en este caso nosotros elegimos usar hibernate
 

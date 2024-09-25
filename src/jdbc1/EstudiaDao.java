@@ -7,7 +7,7 @@ import java.util.List;
 import selectInterface.FiltroAnd;
 import selectInterface.FiltroBase;
 import selectInterface.FiltroIgual;
-import selectInterface.SelectSimple;
+import selectInterface.SelectCompuesto;
 
 public class EstudiaDao <Entity, ID extends Serializable> extends BaseJPARepository<Estudia,EstudiaId>{
     
@@ -15,14 +15,20 @@ public class EstudiaDao <Entity, ID extends Serializable> extends BaseJPAReposit
     public EstudiaDao() {
     	super(Estudia.class , EstudiaId.class);
     }
-	
+
     public void getQueryByCarreraAndCiudad(String nombreCarrera, String ciudadResidencia) {
-        List<String> valores = Arrays.asList("e.estudiante.nombre", "e.estudiante.apellido", "e.estudiante.ciudadResidencia");
-        FiltroBase filtroCarrera = new FiltroIgual("e.carrera.nombre", "'" + nombreCarrera + "'");
-        FiltroBase filtroCiudad = new FiltroIgual("e.estudiante.ciudadResidencia", "'" + ciudadResidencia + "'");
+        List<String> valores = Arrays.asList("e.nombre", "e.apellido", "e.ciudadResidencia");
+        FiltroBase filtroCarrera = new FiltroIgual("c.nombre", "'" + nombreCarrera + "'");
+        FiltroBase filtroCiudad = new FiltroIgual("e.ciudadResidencia", "'" + ciudadResidencia + "'");
         FiltroBase filtroCombinado = new FiltroAnd(filtroCarrera, filtroCiudad);
-        SelectSimple select = new SelectSimple("Estudia e", filtroCombinado, valores);
-        select.execute();
+        
+        List<String> tablasJoin = Arrays.asList("Estudiante e", "Carrera c");
+        List<String> condicionesJoin = Arrays.asList("e.LU = es.estudiante", "c.id = es.carrera");
+
+        SelectCompuesto select2 = new SelectCompuesto("Estudia es", tablasJoin, filtroCombinado, valores, condicionesJoin);
+        
+        
+        select2.execute();
     }
 
 }
