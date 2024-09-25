@@ -8,14 +8,12 @@ import javax.persistence.*;
 public class Estudia {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "LU", referencedColumnName = "LU")
-    private Estudiante estudiante;
+    @Column(name = "LU", nullable = false)
+    private int estudiante;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "ID_Carrera", referencedColumnName = "ID_Carrera")
-    private Carrera carrera;
+    @Column(name = "ID_Carrera", nullable = false)
+    private int carrera; 
 
     @Column(name = "Antiguedad", nullable = false)
     private int antiguedad;
@@ -23,29 +21,28 @@ public class Estudia {
     @Column(name = "Graduado", nullable = false)
     private boolean graduado;
 
-    // Constructors, getters, setters
     public Estudia() {}
 
-    public Estudia(Estudiante estudiante, Carrera carrera, int antiguedad, boolean graduado) {
+    public Estudia(int estudiante, int carrera, int antiguedad, boolean graduado) {
         this.estudiante = estudiante;
         this.carrera = carrera;
         this.antiguedad = antiguedad;
         this.graduado = graduado;
     }
 
-    public Estudiante getEstudiante() {
+    public int getEstudiante() {
         return estudiante;
     }
 
-    public void setEstudiante(Estudiante estudiante) {
+    public void setEstudiante(int estudiante) {
         this.estudiante = estudiante;
     }
 
-    public Carrera getCarrera() {
+    public int getCarrera() {
         return carrera;
     }
 
-    public void setCarrera(Carrera carrera) {
+    public void setCarrera(int carrera) {
         this.carrera = carrera;
     }
 
